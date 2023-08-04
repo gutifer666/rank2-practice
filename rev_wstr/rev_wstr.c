@@ -53,20 +53,26 @@ void	rev_wstr(char *str)
 	int	begin_word;
 	int	end_word;
 
-	index = ft_strlen(str) - 1;
+	index = ft_strlen(str);
 	while(index >= 0)
 	{
-		if(is_space(str[index]))
-		{
-			write(1, &str[index], 1);
+		while(str[index] != '\0' && is_space(str[index]))
 			index--;
-		}
+
 		end_word = index;
-		while(index >= 0 && !is_space(str[index]))
+
+		while(str[index] && !is_space(str[index]))
 			index--;
-		begin_word = index;
-		
+		begin_word = index + 1;
+
+		int	flag;
+		flag = begin_word + 1;
+	
 		ft_putstr(extract_word(str, begin_word, end_word));
+		index--;
+
+		if(flag != 0)
+			write(1, " ", 1);
 		
 	}	
 }
